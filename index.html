@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./styles/standard.css">
+</head>
+
+<body>
+    <div class="pokedex-container">
+        <header class="header">
+            <h1>█▓▒░ POKÉDEX 2000™ ░▒▓█</h1>
+            <p>* ADVANCED DIGITAL POKEMON DATABASE SYSTEM *</p>
+        </header>
+
+        <div class="control-panel">
+            <div class="search-container">
+                <span class="search-label">SEARCH:</span>
+                <input type="text" class="search-input" placeholder="ENTER POKEMON NAME OR ID..." id="searchInput"
+                    maxlength="20">
+                <button class="button-90s" id="searchBtn">SCAN</button>
+                <button class="button-90s" id="resetBtn">RESET</button>
+            </div>
+            <div class="status-lights">
+                <div class="status-light red"></div>
+                <div class="status-light yellow"></div>
+                <div class="status-light green"></div>
+            </div>
+        </div>
+
+        <div class="screen-container">
+            <div class="pokemon-counter" id="pokemonCounter">
+                POKEMON LOADED: 0 / 1010
+            </div>
+
+            <div id="loading" class="loading" style="display: none;">
+                >>> SCANNING POKEMON DATABASE... <<< </div>
+
+                    <div id="errorMessage" class="error-message" style="display: none;"></div>
+
+                    <div id="pokemonGrid" class="pokemon-grid">
+                        <!-- Pokemon werden hier dynamisch eingefügt -->
+                    </div>
+            </div>
+
+            <div class="load-more-container">
+                <button class="load-more-btn" id="loadMoreBtn">
+                    ► LOAD MORE POKEMON ◄
+                </button>
+            </div>
+
+            <div class="footer">
+                ░▒▓█ NINTENDO © 1996-2000 - GAME FREAK - CREATURES INC. █▓▒░
+            </div>
+        </div>
+
+        <!-- Modal für Pokemon Details -->
+        <div id="pokemonModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-title" id="modalTitle">POKEMON DATA</div>
+                <div class="modal-info" id="modalInfo"></div>
+                <button class="button-90s" onclick="closePokemonModal()">CLOSE</button>
+            </div>
+        </div>
+</body>
+
+</html>
