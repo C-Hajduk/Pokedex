@@ -12,11 +12,11 @@
 
 .pokedex-container {
     max-width: 1400px;
-    height: 90vh;
     margin: 0px auto;
     background: #c0c0c0;
     border: 4px outset #c0c0c0;
     box-shadow: 4px 4px 8px #000;
+    overflow: hidden;
 }
 
 .header {
@@ -166,6 +166,17 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 10px;
+}
+
+.error-message {
+    color: #ff0000;
+    text-align: center;
+    padding: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    animation: blink 0.5s infinite;
 }
 
 .load-more-container {
