@@ -22,6 +22,7 @@ let maxPokemonToLoad = 15;
 ================================================= */
 
 async function loadPkm() {
+    showLoading(); // Pokeball erscheint
 
     let endValue = startValue + maxPokemonToLoad; // Berechne bis zu welcher Nummer wir laden
    
@@ -34,6 +35,7 @@ async function loadPkm() {
     
     startValue = endValue; // Aktualisiere die Start-Nummer für das nächste Mal
 
+    hideLoading(); // Pokeball verschwindet
     showPokemon(); // Zeige alle Pokemon auf dem Bildschirm
     updateCounter(); // Aktualisiere den Counter
 };
@@ -129,24 +131,27 @@ loadMoreBtnRef.addEventListener("click", function () {
 
 
 /* ==============================================
-                Typen Kennung
+    Loading Spinning anzeigen und verstecken
 ================================================= */
 
+function showLoading() {
+    loadingRef.style.display = "block";
+    errorMessageRef.style.display = "none";
 
-/* function loadAllTypes() {
-    // Zugriff auf die Datenbank
-    for(let index = 0; index < allPkm.length; index++) {
-        let pokemon = allPkm[index]
-    // Zugriff auf die Typen
-    for(let IndexTyp = 0; IndexTyp < pokemon.types.length; IndexTyp++) {
-        let typeName = pokemon.types[IndexTyp].type.name;
-    }
+    // Verstecke das Pokemon Grid
+    pokemonGridRef.classList.add("hidden");
+    // Deaktiviere den Load More Button
+    loadMoreBtnRef.disabled = true;
+}
 
-        if() { // wenn types.[0].type.name 
-        // dann backgroundcoler
-        };
-    };
-}; */
+function hideLoading() {
+    loadingRef.style.display = "none";
+
+    // Zeige das Pokemon Grid wieder
+    pokemonGridRef.classList.remove("hidden");
+    // Aktiviere den Load More Button
+    loadMoreBtnRef.disabled = false;
+}
 
 
 
