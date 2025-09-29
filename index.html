@@ -38,38 +38,36 @@
         </div>
 
         <div class="screen-container scroll-container">
-
-
             <div id="loading" class="loading" style="display: none;">
-                >>> SCANNING POKEMON DATABASE... <<< </div>
-
-                    <div id="errorMessage" class="error-message" style="display: none;"></div>
-
-                    <div id="pokemonGrid" class="pokemon-grid">
-                        <!-- Pokemon werden hier dynamisch eingefügt -->
-                    </div>
+                <div class="pokeball"></div>
+                <p> >>> SCANNING POKEMON DATABASE... <<< </p>
             </div>
 
-            <div class="load-more-container">
-                <button class="load-more-btn" id="loadMoreBtn">
-                    ► LOAD MORE POKEMON ◄
-                </button>
-            </div>
+            <div id="errorMessage" class="error-message" style="display: none;"></div>
 
-
-            <div class="footer">
-                ░▒▓█ NINTENDO © 1996-2000 - GAME FREAK - CREATURES INC. █▓▒░
-            </div>
+            <div id="pokemonGrid" class="pokemon-grid"></div>
+            <!-- Pokemon werden hier dynamisch eingefügt -->
         </div>
 
-        <!-- Modal für Pokemon Details -->
-        <div id="pokemonModal" class="modal">
-            <div class="modal-content">
-                <div class="modal-title" id="modalTitle">POKEMON DATA</div>
-                <div class="modal-info" id="modalInfo"></div>
-                <button class="button-90s" onclick="closePokemonModal()">CLOSE</button>
-            </div>
+        <div class="load-more-container">
+            <button class="load-more-btn" id="loadMoreBtn">
+                ► LOAD MORE POKEMON ◄
+            </button>
         </div>
+
+        <div class="footer">
+            ░▒▓█ NINTENDO © 1996-2000 - GAME FREAK - CREATURES INC. █▓▒░
+        </div>
+    </div>
+
+    <!-- Modal für Pokemon Details -->
+    <div id="pokemonModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-title" id="modalTitle">POKEMON DATA</div>
+            <div class="modal-info" id="modalInfo"></div>
+            <button class="button-90s" onclick="closePokemonModal()">CLOSE</button>
+        </div>
+    </div>
     </div>
 </body>
 

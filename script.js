@@ -24,6 +24,8 @@ let maxPokemonToLoad = 15;
 async function loadPkm() {
     showLoading(); // Pokeball erscheint
 
+    await new Promise(resolve => setTimeout(resolve, 2000));
+
     let endValue = startValue + maxPokemonToLoad; // Berechne bis zu welcher Nummer wir laden
    
     // Lade Pokemon eins nach dem anderen
@@ -135,21 +137,28 @@ loadMoreBtnRef.addEventListener("click", function () {
 ================================================= */
 
 function showLoading() {
-    loadingRef.style.display = "block";
+    loadingRef.style.display = "flex";
     errorMessageRef.style.display = "none";
 
-    // Verstecke das Pokemon Grid
-    pokemonGridRef.classList.add("hidden");
-    // Deaktiviere den Load More Button
-    loadMoreBtnRef.disabled = true;
+    
+    pokemonGridRef.classList.add("hidden"); // Verstecke das Pokemon Grid
+    
+    setTimeout(() => { // nach 500ms (Animationsdauer) wirklich verstecken
+        pokemonCounterRef.style.display = "none";
+    }, 500);   
+
+    loadMoreBtnRef.disabled = true; // Deaktiviere den Load More Button
 }
 
 function hideLoading() {
     loadingRef.style.display = "none";
 
-    // Zeige das Pokemon Grid wieder
-    pokemonGridRef.classList.remove("hidden");
-    // Aktiviere den Load More Button
+    pokemonGridRef.style.display = "grid"; // Zeige das Pokemon Grid wieder
+    
+    setTimeout(() => {
+        pokemonGridRef.classList.remove("hidden"); // Aktiviere den Load More Button
+    }, 50);
+    
     loadMoreBtnRef.disabled = false;
 }
 
