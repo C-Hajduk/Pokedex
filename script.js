@@ -159,6 +159,8 @@ function hideLoading() {
         pokemonGridRef.classList.remove("hidden"); // Aktiviere den Load More Button
     }, 50);
     
+    pokemonCounterRef.style.display = "block"
+
     loadMoreBtnRef.disabled = false;
 }
 
