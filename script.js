@@ -14,6 +14,7 @@ let allPkm = [];
 let filteredPokemons = [];
 let startValue = 1;
 let maxPokemonToLoad = 15;
+// let typeOfKind = [];
 
 
 /* ==============================================
@@ -35,6 +36,7 @@ async function loadPkm() {
 
     showPokemon(); // Zeige alle Pokemon auf dem Bildschirm
     updateCounter(); // Aktualisiere den Counter
+    loadAllTypes();
 };
 
 // Zeigt nur die Pokemon, die zur Suche passen
@@ -45,6 +47,7 @@ async function filterPkm() {
         filteredPokemons.push(responseAsJson);   
     }
 };
+
 // Diese Funktion zeigt alle geladenen Pokemon im Grid
 function showPokemon() {
     pokemonGridRef.innerHTML = ""; // Leere zuerst das Grid (alte Karten entfernen)
@@ -116,10 +119,10 @@ loadMoreBtnRef.addEventListener("click", function () {
                 Dialog Cards
 ================================================= */
 
-function openDialog(index) {
+/* function openDialog(index) {
     allPkm = index;
     pokemonModalRef.showModal();
-}
+} */
 
 /* ==============================================
                 close Dialog
@@ -129,6 +132,26 @@ function openDialog(index) {
 /* ==============================================
                 Typen Kennung
 ================================================= */
+
+
+/* function loadAllTypes() {
+    // Zugriff auf die Datenbank
+    for(let index = 0; index < allPkm.length; index++) {
+        let pokemon = allPkm[index]
+    // Zugriff auf die Typen
+    for(let IndexTyp = 0; IndexTyp < pokemon.types.length; IndexTyp++) {
+        let typeName = pokemon.types[IndexTyp].type.name;
+    }
+
+        if() { // wenn types.[0].type.name 
+        // dann backgroundcoler
+        };
+    };
+}; */
+
+
+
+
 
 
 
