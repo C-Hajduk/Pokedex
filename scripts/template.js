@@ -15,8 +15,11 @@ function generatePokemonTemplate(index) {
 function generateFilterPokemonTemplate(indexFilter) {
     return `
         <div class="pokemon-card">
-            <h2><span>#${filteredPokemons[indexFilter].id}</span> ${filteredPokemons[indexFilter].name}</h2>            
-            <div class="pokemon-image">
+            <div class="header-card-wrapper">
+                <h2><span>#${filteredPokemons[indexFilter].id}</span> ${filteredPokemons[indexFilter].name}</h2>
+                <img src="./assets/logos/${filteredPokemons[indexFilter].types[0].type.name}.jpg">
+            </div>          
+            <div class="pokemon-image ${filteredPokemons[indexFilter].types[0].type.name}">
                 <img src="${filteredPokemons[indexFilter].sprites.other.showdown.front_default}" loading="lazy">
             </div>
         </div>

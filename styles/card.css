@@ -28,7 +28,6 @@
 }
 
 .pokemon-image {
-    background: #000;
     border: 2px inset #808080;
     height: 120px;
     display: flex;
@@ -36,10 +35,14 @@
     justify-content: center;
     margin: 5px;
     position: relative;
+    
+}
+
+.pokemon-image img:hover {
+    transform: scale(1.2);
 }
 
 .pokemon-image img {
-    width: 80%;
     height: 80%;
     object-fit:contain;
     image-rendering: pixelated;

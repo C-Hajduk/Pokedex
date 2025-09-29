@@ -36,7 +36,6 @@ async function loadPkm() {
 
     showPokemon(); // Zeige alle Pokemon auf dem Bildschirm
     updateCounter(); // Aktualisiere den Counter
-    loadAllTypes();
 };
 
 // Zeigt nur die Pokemon, die zur Suche passen
