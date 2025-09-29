@@ -13,6 +13,7 @@ let modalInfoRef = document.getElementById("modalInfo");
 let allPkm = [];
 let filteredPokemons = [];
 let startValue = 1;
+let maxPokemonToLoad = 15;
 
 
 /* ==============================================
@@ -20,15 +21,23 @@ let startValue = 1;
 ================================================= */
 
 async function loadPkm() {
+
+    let endValue = startValue + maxPokemonToLoad; // Berechne bis zu welcher Nummer wir laden
    
-    for (let index = startValue; index < startValue +20; index++) {
+    // Lade Pokemon eins nach dem anderen
+    for (let index = startValue; index < endValue; index++) {  // Hole Daten von der Pokemon-API 
         let response = await fetch("https://pokeapi.co/api/v2/pokemon/" + index);
         let responseAsJson = await response.json();
-        allPkm.push(responseAsJson); 
+        allPkm.push(responseAsJson); // Füge das Pokemon zu unserer Liste hinzu
     }
-    showPokemon();
+    
+    startValue = endValue; // Aktualisiere die Start-Nummer für das nächste Mal
+
+    showPokemon(); // Zeige alle Pokemon auf dem Bildschirm
+    updateCounter(); // Aktualisiere den Counter
 };
 
+// Zeigt nur die Pokemon, die zur Suche passen
 async function filterPkm() {
     for (let indexFilter = startValue; indexFilter < startValue; indexFilter++) {
         let response = await fetch("https://pokeapi.co/api/v2/pokemon/" + indexFilter);
@@ -36,12 +45,12 @@ async function filterPkm() {
         filteredPokemons.push(responseAsJson);   
     }
 };
-
+// Diese Funktion zeigt alle geladenen Pokemon im Grid
 function showPokemon() {
-    pokemonGridRef.innerHTML = "";
+    pokemonGridRef.innerHTML = ""; // Leere zuerst das Grid (alte Karten entfernen)
 
-    for (let index = 0; index < allPkm.length; index++) {
-        pokemonGridRef.innerHTML += generatePokemonTemplate(index);
+    for (let index = 0; index < allPkm.length; index++) { // Gehe durch alle Pokemon in der Liste
+        pokemonGridRef.innerHTML += generatePokemonTemplate(index); // Erstelle eine Karte für jedes Pokemon und füge sie hinzu
     }        
 };
 
@@ -86,14 +95,40 @@ resetBtnRef.addEventListener("click", function () {
 });
 
 /* ==============================================
+                Counter aktualisieren
+================================================= */
+// Zeigt an, wie viele Pokemon geladen wurden
+function updateCounter() {
+    let number = allPkm.length;
+    pokemonCounterRef.innerHTML += `<span>POKEMON LOADED: ${number} / 1302</span>`
+}
+
+/* ==============================================
+                Load More Pokemon
+================================================= */
+
+loadMoreBtnRef.addEventListener("click", function () {
+    pokemonCounterRef.innerHTML = ""
+    loadPkm();
+})
+
+/* ==============================================
                 Dialog Cards
 ================================================= */
+
+function openDialog(index) {
+    allPkm = index;
+    pokemonModalRef.showModal();
+}
 
 /* ==============================================
                 close Dialog
 ================================================= */
 
+
 /* ==============================================
-                Load More Pokemon
+                Typen Kennung
 ================================================= */
+
+
 
