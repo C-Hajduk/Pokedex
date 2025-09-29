@@ -12,6 +12,21 @@
     transition: none;
 }
 
+.header-card-wrapper {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px;
+}
+
+.pokemon-card h2 {
+    font-size: 18px;
+    text-transform: capitalize;
+}
+
+.pokemon-card span {
+    font-size: 18px;
+}
+
 .pokemon-image {
     background: #000;
     border: 2px inset #808080;
