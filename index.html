@@ -17,7 +17,7 @@
 <body onload="loadPkm()">
     <div class="pokedex-container">
         <header class="header">
-            <h1>█▓▒░ POKÉDEX 2000™ ░▒▓█</h1>
+            <h1>█▓▒░ POKÉDEX 2025™ ░▒▓█</h1>
             <p>* ADVANCED DIGITAL POKEMON DATABASE SYSTEM *</p>
         </header>
 
@@ -26,10 +26,10 @@
                 <label for="search" class="search-label">SEARCH:</label>
                 <input type="search" class="search-input" placeholder="ENTER POKEMON NAME OR ID..." id="searchInput"
                     minlength="3">
-                <button class="button-90s" id="searchBtn">SCAN</button>
-                <button class="button-90s" id="resetBtn">RESET</button>
+                <button id="searchBtn" class="button-90s">SCAN</button>
+                <button id="resetBtn" class="button-90s">RESET</button>
             </div>
-            <div class="pokemon-counter" id="pokemonCounter"></div>
+            <div id="pokemonCounter" class="pokemon-counter"></div>
             <div class="status-lights">
                 <div class="status-light red"></div>
                 <div class="status-light yellow"></div>
@@ -37,8 +37,8 @@
             </div>
         </div>
 
-        <div class="screen-container scroll-container">
-            <div id="loading" class="loading" style="display: none;">
+        <div id="scrollContainer" class="screen-container scroll-container">
+            <div id="loading" class="loading">
                 <div class="pokeball"></div>
                 <p> >>> SCANNING POKEMON DATABASE... <<< </p>
             </div>
@@ -50,7 +50,7 @@
         </div>
 
         <div class="load-more-container">
-            <button class="load-more-btn" id="loadMoreBtn">
+            <button id="loadMoreBtn" class="load-more-btn">
                 ► LOAD MORE POKEMON ◄
             </button>
         </div>
@@ -61,14 +61,51 @@
     </div>
 
     <!-- Modal für Pokemon Details -->
-    <div id="pokemonModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-title" id="modalTitle">POKEMON DATA</div>
-            <div class="modal-info" id="modalInfo"></div>
-            <button class="button-90s" onclick="closePokemonModal()">CLOSE</button>
+    <div class="modal">
+        <div id="pokemonModal" class="modal-content">
+            <!-- Pokemon Card Content -->
+            <div class="pokemon-header">
+                <span id="pokemonName" class="pokemon-name">Pikachu</span>
+                <div class="pokemon-hp-type">
+                    <span id="pokemonHP">50 HP</span>
+                    <span id="pokemonType" class="type-badge">ELECTRIC</span>
+                </div>
+            </div>
+
+            <div class="pokemon-image-dialog">
+                <img id="pokemonImg" src="" alt="Pokemon">
+            </div>
+
+            <div class="pokemon-stats">
+                <div class="stat-item">
+                    <span id="pokemonLength" class="stat-label">Length:</span>
+                </div>
+                <div class="stat-item">
+                    <span id="pokemonWeight" class="stat-label">Weight:</span>
+                </div>
+            </div>
+
+            <div class="attacks-container">
+                <div class="attack-item">
+                    <div id="attack1" class="attack-name">Attack 1</div>
+                    <div id="attackPower" class="attack-power">-</div>
+                </div>
+                <div class="attack-item">
+                    <div id="attack2" class="attack-name">Attack 2</div>
+                    <div id="attackPower" class="attack-power">-</div>
+                </div>
+            </div>
+
+            <div class="navigation-buttons">
+                <button class="nav-button" onclick="previousPokemon()">◄ BACK</button>
+                <button class="nav-button" onclick="nextPokemon()">FORWARD ►</button>
+            </div>
         </div>
+
+        <button class="button-90s" onclick="closePokemonModal()">CLOSE</button>
+
     </div>
-    </div>
+
 </body>
 
 <script src="./scripts/template.js"></script>

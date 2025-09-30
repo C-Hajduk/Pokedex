@@ -7,15 +7,13 @@ let errorMessageRef = document.getElementById("errorMessage");
 let pokemonGridRef = document.getElementById("pokemonGrid");
 let loadMoreBtnRef = document.getElementById("loadMoreBtn");
 let pokemonModalRef = document.getElementById("pokemonModal");
-let modalTitleRef = document.getElementById("modalTitle");
-let modalInfoRef = document.getElementById("modalInfo");
+let scrollContainerRef = document.getElementById("scrollContainer");
+let
 
 let allPkm = [];
 let filteredPokemons = [];
 let startValue = 1;
 let maxPokemonToLoad = 15;
-// let typeOfKind = [];
-
 
 /* ==============================================
                 Content Cards
@@ -122,10 +120,12 @@ loadMoreBtnRef.addEventListener("click", function () {
                 Dialog Cards
 ================================================= */
 
-/* function openDialog(index) {
+ function openDialog(index) {
     allPkm = index;
     pokemonModalRef.showModal();
-} */
+
+
+}
 
 /* ==============================================
                 close Dialog
@@ -140,12 +140,12 @@ function showLoading() {
     loadingRef.style.display = "flex";
     errorMessageRef.style.display = "none";
 
-    
     pokemonGridRef.classList.add("hidden"); // Verstecke das Pokemon Grid
     
-    setTimeout(() => { // nach 500ms (Animationsdauer) wirklich verstecken
+    setTimeout(() => { // nach 50ms (Animationsdauer) wirklich verstecken
         pokemonCounterRef.style.display = "none";
-    }, 500);   
+        scrollContainerRef.style.overflow = "clip";
+    }, 50);   
 
     loadMoreBtnRef.disabled = true; // Deaktiviere den Load More Button
 }
@@ -159,7 +159,8 @@ function hideLoading() {
         pokemonGridRef.classList.remove("hidden"); // Aktiviere den Load More Button
     }, 50);
     
-    pokemonCounterRef.style.display = "block"
+    scrollContainerRef.style.overflow = "auto";
+    pokemonCounterRef.style.display = "block";
 
     loadMoreBtnRef.disabled = false;
 }

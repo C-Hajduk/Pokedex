@@ -149,14 +149,6 @@
     z-index: 10;
 }
 
-.screen-container {
-    background: #000;
-    border: 4px inset #808080;
-    margin: 10px;
-    padding: 10px;
-    min-height: 400px;
-}
-
 .pokemon-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));

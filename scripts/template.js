@@ -25,3 +25,9 @@ function generateFilterPokemonTemplate(indexFilter) {
         </div>
     `;
 };
+
+function generatePokemonModalTemplate() {
+    return `
+            
+    `
+}
