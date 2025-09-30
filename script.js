@@ -6,9 +6,18 @@ let loadingRef = document.getElementById("loading");
 let errorMessageRef = document.getElementById("errorMessage");
 let pokemonGridRef = document.getElementById("pokemonGrid");
 let loadMoreBtnRef = document.getElementById("loadMoreBtn");
-let pokemonModalRef = document.getElementById("pokemonModal");
 let scrollContainerRef = document.getElementById("scrollContainer");
-let
+let pokemonModalRef = document.getElementById("pokemonModal");
+let modalDialogRef = document.getElementById("modalDialog");
+let pokemonNameRef = document.getElementById("pokemonName");
+let pokemonHPRef = document.getElementById("pokemonHP");
+let pokemonTypeRef = document.getElementById("pokemonType");
+let pokemonImgRef = document.getElementById("pokemonImg");
+let pokemonLengthRef = document.getElementById("pokemonLength");
+let pokemonWeightRef = document.getElementById("pokemonWeight");
+let attack1Ref = document.getElementById("attack1");
+let attack2Ref = document.getElementById("attack2");
+let attackPowerRef = document.getElementById("attackPower");
 
 let allPkm = [];
 let filteredPokemons = [];
@@ -61,7 +70,6 @@ function showPokemon() {
 /* ==============================================
     Input Feld kann nach ID und Namen suchen
 ================================================= */
-
 
 // Such-Button: wenn man auf SCAN klickt, läuft die folgende Funktion
  searchBtnRef.addEventListener("click", function () { // klick-hörer anhängen
@@ -121,10 +129,20 @@ loadMoreBtnRef.addEventListener("click", function () {
 ================================================= */
 
  function openDialog(index) {
-    allPkm = index;
+    let pokemon = allPkm[index];
     pokemonModalRef.showModal();
 
+    modalDialogRef.innerHTML += generatePokemonModalTemplate(pokemon);
 
+    pokemonModalRef.addEventListener("click", function (event) {
+    if (event.target === dialog) {
+      closePokemonModal();
+    }
+  });
+
+  function closePokemonModal() {
+    pokemonModalRef.close();
+  }
 }
 
 /* ==============================================

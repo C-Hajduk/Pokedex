@@ -61,50 +61,17 @@
     </div>
 
     <!-- Modal für Pokemon Details -->
-    <div class="modal">
-        <div id="pokemonModal" class="modal-content">
+    <dialog id="pokemonModal" class="modal">
+        <button class="button-90s" onclick="closePokemonModal()">CLOSE</button>
+
+        <div id="modalDialog" class="modal-dialog">
             <!-- Pokemon Card Content -->
-            <div class="pokemon-header">
-                <span id="pokemonName" class="pokemon-name">Pikachu</span>
-                <div class="pokemon-hp-type">
-                    <span id="pokemonHP">50 HP</span>
-                    <span id="pokemonType" class="type-badge">ELECTRIC</span>
-                </div>
-            </div>
-
-            <div class="pokemon-image-dialog">
-                <img id="pokemonImg" src="" alt="Pokemon">
-            </div>
-
-            <div class="pokemon-stats">
-                <div class="stat-item">
-                    <span id="pokemonLength" class="stat-label">Length:</span>
-                </div>
-                <div class="stat-item">
-                    <span id="pokemonWeight" class="stat-label">Weight:</span>
-                </div>
-            </div>
-
-            <div class="attacks-container">
-                <div class="attack-item">
-                    <div id="attack1" class="attack-name">Attack 1</div>
-                    <div id="attackPower" class="attack-power">-</div>
-                </div>
-                <div class="attack-item">
-                    <div id="attack2" class="attack-name">Attack 2</div>
-                    <div id="attackPower" class="attack-power">-</div>
-                </div>
-            </div>
-
             <div class="navigation-buttons">
                 <button class="nav-button" onclick="previousPokemon()">◄ BACK</button>
                 <button class="nav-button" onclick="nextPokemon()">FORWARD ►</button>
             </div>
         </div>
-
-        <button class="button-90s" onclick="closePokemonModal()">CLOSE</button>
-
-    </div>
+    </dialog>
 
 </body>
 
