@@ -26,37 +26,39 @@ function generateFilterPokemonTemplate(indexFilter) {
     `;
 };
 
-function generatePokemonModalTemplate(pokemon) {
+function generatePokemonModalTemplate(pokemonIndex, savedAttackData) {
+    let selectedPokemon = allPkm[pokemonIndex];
     return `
         <div class="pokemon-header">
-                <span id="pokemonName" class="pokemon-name">Pikachu</span>
+                <span class="pokemon-name">${selectedPokemon.name}</span>
                 <div class="pokemon-hp-type">
-                    <span id="pokemonHP">50 HP</span>
-                    <span id="pokemonType" class="type-badge">ELECTRIC</span>
+                    <span class="pokemon-HP">HP ${selectedPokemon.stats[0].base_stat}</span>
+                    <img src="./assets/logos/${selectedPokemon.types[0].type.name}.jpg" class="pokemon-type">
                 </div>
             </div>
 
             <div class="pokemon-image-dialog">
-                <img id="pokemonImg" src="" alt="Pokemon">
+                <img src="${selectedPokemon.sprites.other['official-artwork'].front_default}" alt="Pokemon">
             </div>
 
             <div class="pokemon-stats">
+                <span>Nr.${selectedPokemon.id} ${selectedPokemon.name}</span>
                 <div class="stat-item">
-                    <span id="pokemonLength" class="stat-label">Length:</span>
+                    <span class="stat-label">Height: ${selectedPokemon.height}m</span>
                 </div>
                 <div class="stat-item">
-                    <span id="pokemonWeight" class="stat-label">Weight:</span>
+                    <span class="stat-label">Weight: ${selectedPokemon.weight}kg</span>
                 </div>
             </div>
 
-            <div class="attacks-container">
+            <div id="attacksContainer" class="attacks-container">
                 <div class="attack-item">
-                    <div id="attack1" class="attack-name">Attack 1</div>
-                    <div id="attackPower" class="attack-power">-</div>
+                    <div class="attack-name">${savedAttackData.attack1.name}</div>
+                    <div class="attack-power">${savedAttackData.attack1.info}</div>
                 </div>
                 <div class="attack-item">
-                    <div id="attack2" class="attack-name">Attack 2</div>
-                    <div id="attackPower" class="attack-power">-</div>
+                    <div class="attack-name">${savedAttackData.attack2.name}</div>
+                    <div class="attack-power">${savedAttackData.attack2.info}</div>
                 </div>
             </div>        
     `

@@ -9,15 +9,7 @@ let loadMoreBtnRef = document.getElementById("loadMoreBtn");
 let scrollContainerRef = document.getElementById("scrollContainer");
 let pokemonModalRef = document.getElementById("pokemonModal");
 let modalDialogRef = document.getElementById("modalDialog");
-let pokemonNameRef = document.getElementById("pokemonName");
-let pokemonHPRef = document.getElementById("pokemonHP");
-let pokemonTypeRef = document.getElementById("pokemonType");
-let pokemonImgRef = document.getElementById("pokemonImg");
-let pokemonLengthRef = document.getElementById("pokemonLength");
-let pokemonWeightRef = document.getElementById("pokemonWeight");
-let attack1Ref = document.getElementById("attack1");
-let attack2Ref = document.getElementById("attack2");
-let attackPowerRef = document.getElementById("attackPower");
+let attacksContainerRef = document.getElementById("attacksContainer")
 
 let allPkm = [];
 let filteredPokemons = [];
@@ -128,30 +120,71 @@ loadMoreBtnRef.addEventListener("click", function () {
                 Dialog Cards
 ================================================= */
 
- function openDialog(index) {
-    let pokemon = allPkm[index];
+ async function openDialog(pokemonIndex) {
+    // Zeige das Modal-Fenster
     pokemonModalRef.showModal();
+    // Hole das Pokemon aus unserer Liste
+    let selectedPokemon = allPkm[pokemonIndex];
 
-    modalDialogRef.innerHTML += generatePokemonModalTemplate(pokemon);
+    // Erstelle einen eindeutigen Schlüssel für dieses Pokemon
+    let storageKey = "pokemon_" + selectedPokemon.id;
 
-    pokemonModalRef.addEventListener("click", function (event) {
-    if (event.target === dialog) {
+    // Prüfe: Gibt es gespeicherte Attacken für dieses Pokemon?
+    let savedAttackData = JSON.parse(localStorage.getItem(storageKey));
+
+  // 4. Wenn nicht gespeichert → neue Attacken auswählen und laden
+    if (!savedAttackData) {
+    savedAttackData = { attack1: {}, attack2: {} };
+
+    // Zufällige Attacken-Positionen im Array bestimmen
+    let randomIndex1 = Math.floor(Math.random() * selectedPokemon.moves.length);
+    let randomIndex2 = Math.floor(Math.random() * selectedPokemon.moves.length);
+
+    // Attacke 1 laden
+    let response1 = await fetch(selectedPokemon.moves[randomIndex1].move.url);
+    let moveData1 = await response1.json();
+    savedAttackData.attack1.name = moveData1.name;
+    savedAttackData.attack1.info = moveData1.power || getMoveDescription(moveData1);
+
+    // Attacke 2 laden
+    let response2 = await fetch(selectedPokemon.moves[randomIndex2].move.url);
+    let moveData2 = await response2.json();
+    savedAttackData.attack2.name = moveData2.name;
+    savedAttackData.attack2.info = moveData2.power || getMoveDescription(moveData2);
+
+    // Attacken im localStorage speichern
+    localStorage.setItem(storageKey, JSON.stringify(savedAttackData));
+  }
+
+  // 5. Attacken und Pokémon im Dialog anzeigen
+  modalDialogRef.innerHTML = generatePokemonModalTemplate(pokemonIndex, savedAttackData);
+
+  // 6. Falls man außerhalb des Fensters klickt → schließen
+  pokemonModalRef.onclick = function (event) {
+    if (event.target === pokemonModalRef) {
       closePokemonModal();
     }
-  });
+  };
+}
 
-  function closePokemonModal() {
-    pokemonModalRef.close();
-  }
+// Kleine Hilfsfunktion für Beschreibungstext
+function getMoveDescription(moveData) {
+  let englishEntry = moveData.flavor_text_entries.find(entry => entry.language.name === "en");
+  return englishEntry ? englishEntry.flavor_text : "No description available";
 }
 
 /* ==============================================
                 close Dialog
 ================================================= */
 
+function closePokemonModal() {
+    pokemonModalRef.close();
+
+    modalDialogRef.innerHTML = "";
+  }
 
 /* ==============================================
-    Loading Spinning anzeigen und verstecken
+    Loading Spinning anzeigen
 ================================================= */
 
 function showLoading() {
@@ -167,6 +200,10 @@ function showLoading() {
 
     loadMoreBtnRef.disabled = true; // Deaktiviere den Load More Button
 }
+
+/* ==============================================
+    Loading Spinning verstecken
+================================================= */
 
 function hideLoading() {
     loadingRef.style.display = "none";
