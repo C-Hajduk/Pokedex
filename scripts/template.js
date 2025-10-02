@@ -56,10 +56,18 @@ function generatePokemonModalTemplate(pokemonIndex, savedAttackData) {
                     <div class="attack-name">${savedAttackData.attack1.name}</div>
                     <div class="attack-power">${savedAttackData.attack1.info}</div>
                 </div>
+                <div class="ability-divider"></div>
                 <div class="attack-item">
                     <div class="attack-name">${savedAttackData.attack2.name}</div>
                     <div class="attack-power">${savedAttackData.attack2.info}</div>
                 </div>
+                <div class="border-dashed"></div>
+                <div class="items-center">
+                    <div class="text-center"><p>weakness</p></div>
+                    <div class="text-center"><p>resistance</p></div>
+                    <div class="text-center"><p>retreat cost</p></div>
+                </div>
+                <div class="text-Character">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro autem reprehenderit consequatur modi, commodi expedita!</div>
             </div>        
     `
 }

@@ -158,6 +158,7 @@ loadMoreBtnRef.addEventListener("click", function () {
 
   // 5. Attacken und Pokémon im Dialog anzeigen
   modalDialogRef.innerHTML = generatePokemonModalTemplate(pokemonIndex, savedAttackData);
+  modalDialogRef.classList.add(selectedPokemon.types[0].type.name)
 
   // 6. Falls man außerhalb des Fensters klickt → schließen
   pokemonModalRef.onclick = function (event) {
