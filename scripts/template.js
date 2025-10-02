@@ -68,6 +68,6 @@ function generatePokemonModalTemplate(pokemonIndex, savedAttackData) {
                     <div class="text-center"><p>retreat cost</p></div>
                 </div>
                 <div class="text-Character">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro autem reprehenderit consequatur modi, commodi expedita!</div>
-            </div>        
+            </div>
     `
 }

@@ -64,7 +64,7 @@ function showPokemon() {
 ================================================= */
 
 // Such-Button: wenn man auf SCAN klickt, läuft die folgende Funktion
- searchBtnRef.addEventListener("click", function () { // klick-hörer anhängen
+ searchBtnRef.addEventListener("click", function () { // klicker anhängen
     let searchValue = searchInputRef.value.toLowerCase(); // hol den Text aus dem Input, entferne Leerzeichen und mach alles klein
 
     // suche in allPkm nach Pokémon mit genau gleichem Namen oder ID
@@ -158,6 +158,8 @@ loadMoreBtnRef.addEventListener("click", function () {
 
   // 5. Attacken und Pokémon im Dialog anzeigen
   modalDialogRef.innerHTML = generatePokemonModalTemplate(pokemonIndex, savedAttackData);
+  modalDialogRef.className = ""
+  modalDialogRef.classList.add("modal-dialog")
   modalDialogRef.classList.add(selectedPokemon.types[0].type.name)
 
   // 6. Falls man außerhalb des Fensters klickt → schließen
@@ -173,6 +175,18 @@ function getMoveDescription(moveData) {
   let englishEntry = moveData.flavor_text_entries.find(entry => entry.language.name === "en");
   return englishEntry ? englishEntry.flavor_text : "No description available";
 }
+
+/* ==============================================
+            next Pokemon Button Dialog
+================================================= */
+
+
+
+/* ==============================================
+            next Pokemon Button Dialog
+================================================= */
+
+
 
 /* ==============================================
                 close Dialog
