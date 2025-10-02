@@ -15,6 +15,7 @@ let allPkm = [];
 let filteredPokemons = [];
 let startValue = 1;
 let maxPokemonToLoad = 15;
+let currentPokemonIndex = 0;
 
 /* ==============================================
                 Content Cards
@@ -121,6 +122,7 @@ loadMoreBtnRef.addEventListener("click", function () {
 ================================================= */
 
  async function openDialog(pokemonIndex) {
+    currentPokemonIndex = pokemonIndex;
     // Zeige das Modal-Fenster
     pokemonModalRef.showModal();
     // Hole das Pokemon aus unserer Liste
@@ -180,13 +182,26 @@ function getMoveDescription(moveData) {
             next Pokemon Button Dialog
 ================================================= */
 
+function nextPokemon() {
+    currentPokemonIndex++;
+    if(currentPokemonIndex >= allPkm.length) {
+        currentPokemonIndex = 0;
+    }
+    openDialog(currentPokemonIndex);
+}
 
 
 /* ==============================================
             next Pokemon Button Dialog
 ================================================= */
 
-
+function previousPokemon() {
+    currentPokemonIndex--;
+    if(currentPokemonIndex < 0) {
+        currentPokemonIndex = allPkm.length - 1;
+    }
+    openDialog(currentPokemonIndex);
+}
 
 /* ==============================================
                 close Dialog

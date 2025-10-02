@@ -9,7 +9,6 @@
     top: 0;
     left: 0;
     margin: auto;
-    
 }
 
 dialog::backdrop {
@@ -19,11 +18,13 @@ dialog::backdrop {
 
 /* ========== Dialog-Inhalt ========== */
 .modal-dialog {
+    border-radius: 12px;
     margin: 8px;
     padding: 20px;
     border: 3px solid black;
     border-radius: 12px;
     /* min-height: -webkit-fill-available; */
+    /* z-index: 10; */
 }
 
 /* ========== Header ========== */
@@ -167,34 +168,8 @@ dialog::backdrop {
     margin-top: 4px;
 }
 
-.text-center {
+/* .text-center {
 
-}
+} */
 
 /* ========== Navigation ========== */
-.navigation-buttons {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-    margin-top: 15px;
-}
-
-.nav-button {
-    background-color: #e0e0e0;
-    border: 2px solid #000;
-    padding: 10px 20px;
-    border-radius: 0;
-    cursor: pointer;
-    font-weight: bold;
-    flex: 1;
-    box-shadow: 2px 2px 0 #000;
-}
-
-.nav-button:hover {
-    background-color: #d0d0d0;
-}
-
-.nav-button:active {
-    box-shadow: 1px 1px 0 #000;
-    transform: translate(1px, 1px);
-}
