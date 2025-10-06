@@ -1,0 +1,86 @@
+/* Bis 850px: Panel untereinander, Buttons nebeneinander */
+@media (max-width: 850px) {
+  .control-panel {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .search-container {
+    flex-direction: column; /* Input + Buttons untereinander */
+    align-items: center;
+    width: 100%;
+  }
+
+  .search-label {
+    margin-bottom: 5px;
+  }
+
+  .search-input {
+    min-width: 200px;
+    width: 100%;
+    max-width: 300px;
+  }
+
+  /* Buttons nebeneinander und zentriert */
+  .button-group {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .button-90s {
+    min-width: 120px;
+  }
+}
+
+/* Bis 500px: gleiches Layout, aber engeres Padding */
+@media (max-width: 500px) {
+  .search-input {
+    width: 80%;
+    max-width: 260px;
+  }
+
+  .button-group {
+    gap: 8px;
+  }
+
+  .button-90s {
+    min-width: 100px;
+    padding: 5px 10px;
+  }
+}
+
+@media (400px <= width <= 600px) {
+    .header h1 {
+        font-size: 18px;
+    }
+
+    .header::before {
+        display: none;
+    }
+}
+
+@media (300px <= width <= 400px) {
+    .header h1 {
+        font-size: 14px;
+    }
+
+    .header::before {
+        display: none;
+    }
+}
+
+@media (min-width: 375px) {
+    .modal {
+        width: 90%;
+    }
+    .items-center {
+        gap: 12px;
+    }
+    .text-center p {
+        text-align: center;
+    }
+}

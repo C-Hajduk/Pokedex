@@ -249,10 +249,3 @@ function hideLoading() {
 
     loadMoreBtnRef.disabled = false;
 }
-
-
-
-
-
-
-

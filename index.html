@@ -28,8 +28,10 @@
                 <label for="search" class="search-label">SEARCH:</label>
                 <input type="search" class="search-input" placeholder="ENTER POKEMON NAME OR ID..." id="searchInput"
                     minlength="3">
-                <button id="searchBtn" class="button-90s">SCAN</button>
-                <button id="resetBtn" class="button-90s">RESET</button>
+                <div class="button-group">
+                    <button id="searchBtn" class="button-90s">SCAN</button>
+                    <button id="resetBtn" class="button-90s">RESET</button>
+                </div>
             </div>
             <div id="pokemonCounter" class="pokemon-counter"></div>
             <div class="status-lights">
@@ -39,17 +41,17 @@
             </div>
         </div>
 
-        <div id="scrollContainer" class="screen-container scroll-container">
+        <section id="scrollContainer" class="screen-container scroll-container">
             <div id="loading" class="loading">
                 <div class="pokeball"></div>
                 <p> >>> SCANNING POKEMON DATABASE... <<< </p>
             </div>
 
-            <div id="errorMessage" class="error-message" style="display: none;"></div>
+            <div id="errorMessage" class="error-message"></div>
 
             <div id="pokemonGrid" class="pokemon-grid"></div>
             <!-- Pokemon werden hier dynamisch eingefügt -->
-        </div>
+        </section>
 
         <div class="load-more-container">
             <button id="loadMoreBtn" class="load-more-btn">
@@ -57,9 +59,9 @@
             </button>
         </div>
 
-        <div class="footer">
+        <footer>
             ░▒▓█ NINTENDO © 1996-2000 - GAME FREAK - CREATURES INC. █▓▒░
-        </div>
+        </footer>
     </div>
 
     <!-- Modal für Pokemon Details -->
