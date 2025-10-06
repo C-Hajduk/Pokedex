@@ -24,7 +24,7 @@ let currentPokemonIndex = 0;
 async function loadPkm() {
     showLoading(); // Pokeball erscheint
 
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    await new Promise(resolve => setTimeout(resolve, 3000)); // 3 Sekunden warten, während der Pokéball pulsiert
 
     let endValue = startValue + maxPokemonToLoad; // Berechne bis zu welcher Nummer wir laden
    
@@ -79,11 +79,12 @@ function showPokemon() {
     if (filteredPokemons.length > 0) { //prüft: hat der Benutzer überhaupt etwas geschrieben?               
         for (let indexFilter = 0; indexFilter < filteredPokemons.length; indexFilter++) {
         pokemonGridRef.innerHTML += generateFilterPokemonTemplate(indexFilter); // Code, der ausgeführt wird, wenn die Bedingung wahr ist
-        } 
+        errorMessageRef.style.display = "none";
+    } 
 
     }else { 
         errorMessageRef.innerHTML += `<p>ERROR: POKEMON NOT FOUND IN DATABASE!</p>`; // setze Text der Fehlermeldung
-        errorMessageRef.style.display = "block" // zeige die Fehlermeldung an
+        errorMessageRef.style.display = "block"; // zeige die Fehlermeldung an
     }
  });
 
