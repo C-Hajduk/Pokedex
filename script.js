@@ -1,3 +1,7 @@
+/* ==============================================
+                Variablen definieren
+================================================= */
+
 let searchInputRef = document.getElementById("searchInput");
 let searchBtnRef = document.getElementById("searchBtn");
 let resetBtnRef = document.getElementById("resetBtn");
@@ -11,18 +15,22 @@ let pokemonModalRef = document.getElementById("pokemonModal");
 let modalDialogRef = document.getElementById("modalDialog");
 let attacksContainerRef = document.getElementById("attacksContainer")
 
-let allPkm = [];
-let filteredPokemons = [];
-let startValue = 1;
-let maxPokemonToLoad = 15;
-let currentPokemonIndex = 0;
-
 /* ==============================================
-                Content Cards
+                Daten Variablen
 ================================================= */
 
-async function loadPkm() {
-    showLoading(); // Pokeball erscheint
+let allPkm = []; // Ein leeres Array (Liste), wo ALLE geladenen Pokemon gespeichert werden
+let filteredPokemons = []; // Ein leeres Array für gefilterte Pokemon (wenn man nach etwas sucht)
+let startValue = 1;// Die Nummer des ersten Pokemon, das wir laden wollen // Beim Start ist das Pokemon #1
+let maxPokemonToLoad = 15; // Wie viele Pokemon auf einmal geladen werden sollen // Immer 15 Stück pro "Ladung"
+let currentPokemonIndex = 0; // Speichert, welches Pokemon gerade im Popup-Fenster angezeigt wird
+
+/* ==============================================
+                FUNKTION: loadPkm()
+================================================= */
+
+async function loadPkm() { // "async" bedeutet: Diese Funktion wartet auf Dinge (z.B. Internet-Antworten)
+    showLoading(); // Zeigt den Ladebildschirm (Pokeball-Animation) an
 
     await new Promise(resolve => setTimeout(resolve, 3000)); // 3 Sekunden warten, während der Pokéball pulsiert
 
@@ -31,8 +39,8 @@ async function loadPkm() {
     // Lade Pokemon eins nach dem anderen
     for (let index = startValue; index < endValue; index++) {  // Hole Daten von der Pokemon-API 
         let response = await fetch("https://pokeapi.co/api/v2/pokemon/" + index);
-        let responseAsJson = await response.json();
-        allPkm.push(responseAsJson); // Füge das Pokemon zu unserer Liste hinzu
+        let responseAsJson = await response.json(); // Wandelt die Antwort in ein nutzbares JavaScript-Objekt um
+        allPkm.push(responseAsJson); // Fügt das neue Pokemon zur allPkm-Liste hinzu
     }
     
     startValue = endValue; // Aktualisiere die Start-Nummer für das nächste Mal
@@ -41,6 +49,10 @@ async function loadPkm() {
     showPokemon(); // Zeige alle Pokemon auf dem Bildschirm
     updateCounter(); // Aktualisiere den Counter
 };
+
+/* ==============================================
+            FUNKTION: filterPkm()
+================================================= */
 
 // Zeigt nur die Pokemon, die zur Suche passen
 async function filterPkm() {
@@ -51,6 +63,9 @@ async function filterPkm() {
     }
 };
 
+/* ==============================================
+            FUNKTION: showPokemon()
+================================================= */
 // Diese Funktion zeigt alle geladenen Pokemon im Grid
 function showPokemon() {
     pokemonGridRef.innerHTML = ""; // Leere zuerst das Grid (alte Karten entfernen)
@@ -91,7 +106,7 @@ function showPokemon() {
     } 
 
     }else { 
-        errorMessageRef.innerHTML += `<p>ERROR: POKEMON NOT FOUND IN DATABASE!</p>`; // setze Text der Fehlermeldung
+        errorMessageRef.innerHTML = `<p>ERROR: POKEMON NOT FOUND IN DATABASE!</p>`; // setze Text der Fehlermeldung
         errorMessageRef.style.display = "block"; // zeige die Fehlermeldung an
     }
  });
@@ -127,35 +142,31 @@ loadMoreBtnRef.addEventListener("click", function () {
 })
 
 /* ==============================================
-                Dialog Cards
+                FUNKTION: openDialog()
 ================================================= */
 
- async function openDialog(pokemonIndex) {
-    currentPokemonIndex = pokemonIndex;
-    // Zeige das Modal-Fenster
-    pokemonModalRef.showModal();
-    // Hole das Pokemon aus unserer Liste
-    let selectedPokemon = allPkm[pokemonIndex];
+ async function openDialog(pokemonIndex) { // "pokemonIndex" ist die Position des Pokemon in der Liste
+    currentPokemonIndex = pokemonIndex; // Speichert, welches Pokemon gerade angezeigt wird // Das brauchen wir für die Vor/Zurück-Buttons
+    pokemonModalRef.showModal(); // Öffnet das Popup-Fenster
 
-    // Erstelle einen eindeutigen Schlüssel für dieses Pokemon
-    let storageKey = "pokemon_" + selectedPokemon.id;
+    let selectedPokemon = allPkm[pokemonIndex]; // Holt das Pokemon aus der Liste
 
-    // Prüfe: Gibt es gespeicherte Attacken für dieses Pokemon?
-    let savedAttackData = JSON.parse(localStorage.getItem(storageKey));
+    let storageKey = "pokemon_" + selectedPokemon.id; // Erstelle einen eindeutigen Schlüssel für dieses Pokemon
 
-  // 4. Wenn nicht gespeichert → neue Attacken auswählen und laden
-    if (!savedAttackData) {
-    savedAttackData = { attack1: {}, attack2: {} };
+    let savedAttackData = JSON.parse(localStorage.getItem(storageKey)); // Prüfe: Gibt es gespeicherte Attacken für dieses Pokemon?
+
+    if (!savedAttackData) { // Wenn nicht gespeichert → neue Attacken auswählen und laden
+    savedAttackData = { attack1: {}, attack2: {} }; // Erstellt ein neues Objekt für zwei Attacken
 
     // Zufällige Attacken-Positionen im Array bestimmen
-    let randomIndex1 = Math.floor(Math.random() * selectedPokemon.moves.length);
-    let randomIndex2 = Math.floor(Math.random() * selectedPokemon.moves.length);
+    let randomIndex1 = Math.floor(Math.random() * selectedPokemon.moves.length); // "Math.floor()" rundet nach unten zur nächsten ganzen Zahl
+    let randomIndex2 = Math.floor(Math.random() * selectedPokemon.moves.length); // "Math.random()" gibt eine Zufallszahl zwischen 0 und 1
 
     // Attacke 1 laden
-    let response1 = await fetch(selectedPokemon.moves[randomIndex1].move.url);
-    let moveData1 = await response1.json();
-    savedAttackData.attack1.name = moveData1.name;
-    savedAttackData.attack1.info = moveData1.power || getMoveDescription(moveData1);
+    let response1 = await fetch(selectedPokemon.moves[randomIndex1].move.url); // Holt Details zur ersten Attacke von der API
+    let moveData1 = await response1.json(); // Wandelt die Antwort in ein nutzbares Objekt um
+    savedAttackData.attack1.name = moveData1.name; // Speichert den Namen der Attacke
+    savedAttackData.attack1.info = moveData1.power || getMoveDescription(moveData1); // Speichert die Stärke der Attacke ODER eine Beschreibung // "||" bedeutet: Wenn power existiert, nimm das, sonst nimm die Beschreibung
 
     // Attacke 2 laden
     let response2 = await fetch(selectedPokemon.moves[randomIndex2].move.url);
@@ -167,13 +178,13 @@ loadMoreBtnRef.addEventListener("click", function () {
     localStorage.setItem(storageKey, JSON.stringify(savedAttackData));
   }
 
-  // 5. Attacken und Pokémon im Dialog anzeigen
+  // Attacken und Pokémon im Dialog anzeigen
   modalDialogRef.innerHTML = generatePokemonModalTemplate(pokemonIndex, savedAttackData);
-  modalDialogRef.className = ""
-  modalDialogRef.classList.add("modal-dialog")
-  modalDialogRef.classList.add(selectedPokemon.types[0].type.name)
+  modalDialogRef.className = "" // Löscht alle CSS-Klassen vom Modal
+  modalDialogRef.classList.add("modal-dialog") // Fügt die Grund-Klasse hinzu
+  modalDialogRef.classList.add(selectedPokemon.types[0].type.name)  // Fügt die Typ-Klasse hinzu (z.B. "fire" für Feuer-Pokemon)
 
-  // 6. Falls man außerhalb des Fensters klickt → schließen
+  // Falls man außerhalb des Fensters klickt → schließen
   pokemonModalRef.onclick = function (event) {
     if (event.target === pokemonModalRef) {
       closePokemonModal();
@@ -198,7 +209,6 @@ function nextPokemon() {
     }
     openDialog(currentPokemonIndex);
 }
-
 
 /* ==============================================
             next Pokemon Button Dialog
