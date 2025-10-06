@@ -81,7 +81,7 @@ function showPokemon() {
         pokemonGridRef.innerHTML += generateFilterPokemonTemplate(indexFilter); // Code, der ausgeführt wird, wenn die Bedingung wahr ist
         } 
 
-    }else {
+    }else { 
         errorMessageRef.innerHTML += `<p>ERROR: POKEMON NOT FOUND IN DATABASE!</p>`; // setze Text der Fehlermeldung
         errorMessageRef.style.display = "block" // zeige die Fehlermeldung an
     }

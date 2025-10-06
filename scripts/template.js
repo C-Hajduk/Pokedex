@@ -38,16 +38,18 @@ function generatePokemonModalTemplate(pokemonIndex, savedAttackData) {
             </div>
 
             <div class="pokemon-image-dialog">
+                <button class="nav-button prev-button" onclick="previousPokemon()">◄</button>
                 <img src="${selectedPokemon.sprites.other['official-artwork'].front_default}" alt="Pokemon">
+                <button class="nav-button next-button" onclick="nextPokemon()">►</button>
             </div>
 
             <div class="pokemon-stats">
-                <span>Nr.${selectedPokemon.id} ${selectedPokemon.name}</span>
+                <span>#${selectedPokemon.id} ${selectedPokemon.name}</span>
                 <div class="stat-item">
-                    <span class="stat-label">Height: ${selectedPokemon.height}m</span>
+                    <span >Height: ${selectedPokemon.height}m</span>
                 </div>
                 <div class="stat-item">
-                    <span class="stat-label">Weight: ${selectedPokemon.weight}kg</span>
+                    <span>Weight: ${selectedPokemon.weight}kg</span>
                 </div>
             </div>
 

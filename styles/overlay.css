@@ -1,6 +1,6 @@
 /* ========== Dialog-Overlay ========== */
 .modal {
-    position: absolute;
+    position: relative;
     /* height: 850px; */
     max-width: 30rem;
     border-radius: 8px;
@@ -75,7 +75,7 @@ dialog::backdrop {
     justify-content: center;
     overflow: hidden;
     width: 100%;
-    height: 250px;
+    height: 230px;
     border: 6px solid #b08d2d;
     box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5), 0 0 0 2px var(--card-border);
     background: linear-gradient(to bottom, #d1f7c4, #88e0b4);
@@ -93,7 +93,7 @@ dialog::backdrop {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    gap: 40px;
+    /* gap: 20px; */
     margin-top: 4px;
     border: 1px solid gray;
     text-transform: capitalize;
@@ -105,13 +105,12 @@ dialog::backdrop {
     padding-bottom: 4px;
 }
 
-.stat-item {
+.pokemon-stats span {
     font-size: 14px;
 }
 
-.stat-label {
-    font-weight: bold;
-    margin-right: 5px;
+.stat-item {
+    font-size: 14px;
 }
 
 /* ========== Attacken ========== */
@@ -168,8 +167,30 @@ dialog::backdrop {
     margin-top: 4px;
 }
 
-/* .text-center {
-
-} */
-
 /* ========== Navigation ========== */
+.nav-button {
+background: transparent;
+  border: none;
+  color: #000;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 1.8rem;
+  cursor: pointer;
+  text-shadow: 1px 1px 0 #f47c26; /* leichter oranger Pixel-Effekt */
+  transition: transform 0.1s;
+}
+
+.nav-button:hover {
+    transform: translateY(-2px);
+}
+
+.nav-button:active {
+    transform: translateY(1px);
+}
+
+.prev-button {
+    margin-left: 20px;
+}
+
+.next-button {
+    margin-right: 20px;
+}
