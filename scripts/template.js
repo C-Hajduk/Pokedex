@@ -14,7 +14,7 @@ function generatePokemonTemplate(index) {
 
 function generateFilterPokemonTemplate(indexFilter) {
     return `
-        <div onclick="openDialog(${[indexFilter]})" class="pokemon-card">
+        <div onclick="openDialog(${filteredPokemons[indexFilter].id} - 1)" class="pokemon-card">
             <div class="header-card-wrapper">
                 <h2><span>#${filteredPokemons[indexFilter].id}</span> ${filteredPokemons[indexFilter].name}</h2>
                 <img src="./assets/logos/${filteredPokemons[indexFilter].types[0].type.name}.jpg">

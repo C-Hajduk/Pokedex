@@ -67,7 +67,6 @@ function showPokemon() {
 // Such-Button: wenn man auf SCAN klickt, läuft die folgende Funktion
  searchBtnRef.addEventListener("click", function () { // klicker anhängen
     let searchValue = searchInputRef.value.toLowerCase(); // hol den Text aus dem Input, entferne Leerzeichen und mach alles klein
-
     // suche in allPkm nach Pokémon mit genau gleichem Namen oder ID
     filteredPokemons = allPkm.filter(pokemon => { // durchsuche die geladene Pokémon-Liste
         return pokemon.name.includes(searchValue)  || // wahr, wenn der Name (klein geschrieben) genau übereinstimmt
