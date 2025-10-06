@@ -67,6 +67,15 @@ function showPokemon() {
 // Such-Button: wenn man auf SCAN klickt, läuft die folgende Funktion
  searchBtnRef.addEventListener("click", function () { // klicker anhängen
     let searchValue = searchInputRef.value.toLowerCase(); // hol den Text aus dem Input, entferne Leerzeichen und mach alles klein
+    
+    // Mindestlänge prüfen
+    if (searchValue.length < 3) {
+        errorMessageRef.innerHTML = `<p>Bitte mindestens 3 Buchstaben eingeben!</p>`;
+        errorMessageRef.style.display = "block";
+        pokemonGridRef.innerHTML = ""; // Grid leeren
+        return; // Abbrechen, Suche nicht ausführen
+    }    
+    
     // suche in allPkm nach Pokémon mit genau gleichem Namen oder ID
     filteredPokemons = allPkm.filter(pokemon => { // durchsuche die geladene Pokémon-Liste
         return pokemon.name.includes(searchValue)  || // wahr, wenn der Name (klein geschrieben) genau übereinstimmt
