@@ -192,10 +192,21 @@ loadMoreBtnRef.addEventListener("click", function () {
   };
 }
 
-// Kleine Hilfsfunktion für Beschreibungstext
-function getMoveDescription(moveData) {
+/* ==============================================
+        HILFSFUNKTION: getMoveDescription()
+================================================= */
+// Holt eine englische Beschreibung für eine Attacke
+
+function getMoveDescription(moveData) { // "moveData" ist das Attacken-Objekt von der API
   let englishEntry = moveData.flavor_text_entries.find(entry => entry.language.name === "en");
+    // Sucht nach einer englischen Beschreibung
+    // "find()" durchsucht die Liste und gibt das erste passende Element zurück
+    // "entry.language.name === "en"" prüft, ob es eine englische Beschreibung ist
   return englishEntry ? englishEntry.flavor_text : "No description available";
+    // Gibt die Beschreibung zurück, wenn vorhanden
+    // "?" ist der ternäre Operator: "Bedingung ? Wert wenn wahr : Wert wenn falsch"
+    // Wenn englishEntry existiert → gibt flavor_text zurück
+    // Wenn nicht → gibt "No description available" zurück
 }
 
 /* ==============================================
@@ -204,10 +215,10 @@ function getMoveDescription(moveData) {
 
 function nextPokemon() {
     currentPokemonIndex++;
-    if(currentPokemonIndex >= allPkm.length) {
-        currentPokemonIndex = 0;
+    if(currentPokemonIndex >= allPkm.length) { // Prüft: Sind wir am Ende der Liste?
+        currentPokemonIndex = 0;  // Springt zurück zum ersten Pokemon // Das macht eine Endlos-Schleife durch alle Pokemon
     }
-    openDialog(currentPokemonIndex);
+    openDialog(currentPokemonIndex); // Öffnet das Popup mit dem neuen Pokemon
 }
 
 /* ==============================================
@@ -216,8 +227,8 @@ function nextPokemon() {
 
 function previousPokemon() {
     currentPokemonIndex--;
-    if(currentPokemonIndex < 0) {
-        currentPokemonIndex = allPkm.length - 1;
+    if(currentPokemonIndex < 0) { // Prüft: Sind wir vor dem ersten Pokemon?
+        currentPokemonIndex = allPkm.length - 1; // Springt zum letzten Pokemon // "- 1" weil der Index bei 0 startet
     }
     openDialog(currentPokemonIndex);
 }
@@ -227,9 +238,9 @@ function previousPokemon() {
 ================================================= */
 
 function closePokemonModal() {
-    pokemonModalRef.close();
+    pokemonModalRef.close(); // Schließt das <dialog>-Element // "close()" ist eine eingebaute Funktion
 
-    modalDialogRef.innerHTML = "";
+    modalDialogRef.innerHTML = ""; // Löscht den Inhalt des Popups  // Das spart Speicher und verhindert Probleme
   }
 
 /* ==============================================
@@ -238,13 +249,20 @@ function closePokemonModal() {
 
 function showLoading() {
     loadingRef.style.display = "flex";
+    // Macht den Ladebildschirm sichtbar
+    // "flex" ist ein CSS-Layout-Modus
     errorMessageRef.style.display = "none";
+    // Versteckt Fehlermeldungen
 
-    pokemonGridRef.classList.add("hidden"); // Verstecke das Pokemon Grid
+    pokemonGridRef.classList.add("hidden");
+    // Fügt die CSS-Klasse "hidden" hinzu
+    // Das versteckt das Pokemon-Grid mit einer Animation
     
     setTimeout(() => { // nach 50ms (Animationsdauer) wirklich verstecken
-        pokemonCounterRef.style.display = "none";
-        scrollContainerRef.style.overflow = "clip";
+        pokemonCounterRef.style.display = "none"; // Versteckt den Counter
+        scrollContainerRef.style.overflow = "clip"; 
+        // Verhindert Scrollen während des Ladens 
+        // "overflow: clip" schneidet überstehendem Inhalt ab
     }, 50);   
 
     loadMoreBtnRef.disabled = true; // Deaktiviere den Load More Button
@@ -259,12 +277,15 @@ function hideLoading() {
 
     pokemonGridRef.style.display = "grid"; // Zeige das Pokemon Grid wieder
     
-    setTimeout(() => {
-        pokemonGridRef.classList.remove("hidden"); // Aktiviere den Load More Button
+    setTimeout(() => { // Wartet 50 Millisekunden für die Animation
+        pokemonGridRef.classList.remove("hidden"); 
+        // Entfernt die "hidden"-Klasse
+        // Das aktiviert die Einblend-Animation
     }, 50);
     
-    scrollContainerRef.style.overflow = "auto";
-    pokemonCounterRef.style.display = "block";
+    scrollContainerRef.style.overflow = "auto"; // Erlaubt wieder Scrollen // "auto" zeigt Scrollbars, wenn nötig
+    pokemonCounterRef.style.display = "block"; // Zeigt den Counter wieder an
 
     loadMoreBtnRef.disabled = false;
+    // Aktiviert den "LOAD MORE"-Button wieder
 }
