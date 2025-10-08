@@ -83,8 +83,9 @@ function showPokemon() {
  searchBtnRef.addEventListener("click", function () { // klicker anhängen
     let searchValue = searchInputRef.value.toLowerCase(); // hol den Text aus dem Input, entferne Leerzeichen und mach alles klein
     
-    // Mindestlänge prüfen
-    if (searchValue.length < 3) {
+    let isNumber = /^\d+$/.test(searchValue); // true, wenn nur Ziffern enthalten sind
+
+    if (!isNumber && searchValue.length < 3) {
         errorMessageRef.innerHTML = `<p>Bitte mindestens 3 Buchstaben eingeben!</p>`;
         errorMessageRef.style.display = "block";
         pokemonGridRef.innerHTML = ""; // Grid leeren
@@ -97,7 +98,7 @@ function showPokemon() {
         pokemon.id.toString() == searchValue   // oder wahr, wenn die ID als Text gleich ist   
     });
         pokemonGridRef.innerHTML = ""; // leere das Grid, damit zuerst nichts angezeigt wird (wir zeigen dann nur Treffer)
-
+    // Mindestlänge prüfen
 // wenn ich den namen oder ID eingebe, dann zeige pokemon
     if (filteredPokemons.length > 0) { //prüft: hat der Benutzer überhaupt etwas geschrieben?               
         for (let indexFilter = 0; indexFilter < filteredPokemons.length; indexFilter++) {
